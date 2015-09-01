@@ -34,6 +34,8 @@ STDLIB_NAMES = set(('BuiltIn', 'Collections', 'DateTime', 'Dialogs', 'Easter',
                     'Screenshot', 'String', 'Telnet', 'XML'))
 IMPORTER = Importer()
 
+BDD_STYLE_IGNORED_PREFIXES = ('given ', 'when ', 'then ', 'and ')
+
 
 class Namespace:
     _default_libraries = ('BuiltIn', 'Reserved', 'Easter')
@@ -282,7 +284,7 @@ class KeywordStore(object):
             return True
 
     def _get_bdd_style_handler(self, name):
-        for prefix in ['given ', 'when ', 'then ', 'and ']:
+        for prefix in BDD_STYLE_IGNORED_PREFIXES:
             if name.lower().startswith(prefix):
                 handler = self._get_handler(name[len(prefix):])
                 if handler:
